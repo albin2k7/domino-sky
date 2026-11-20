@@ -1,0 +1,151 @@
+@import "./theme/tokens.css";
+
+/* Base typography & Reset */
+:root {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color-scheme: dark;
+}
+
+[data-theme="light-briefing"] {
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* Monospace font & Tabular Figures */
+code, kbd, samp, pre, .font-mono, [data-tabular="true"] {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* ===== ACCESSIBILITY: Focus Visible Ring ===== */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Remove default outline only when focus-visible handles it */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Screen-reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Semantic Background Utility Classes */
+.bg-bg { background-color: var(--bg); }
+.bg-surface { background-color: var(--surface); }
+.bg-panel { background-color: var(--panel); }
+.bg-panel-glass { background-color: var(--panel-glass); }
+.bg-accent { background-color: var(--accent); }
+.bg-accent-muted { background-color: var(--accent-muted); }
+.bg-ok { background-color: var(--ok); }
+.bg-ok-muted { background-color: var(--ok-muted); }
+.bg-warn { background-color: var(--warn); }
+.bg-warn-muted { background-color: var(--warn-muted); }
+.bg-danger { background-color: var(--danger); }
+.bg-danger-muted { background-color: var(--danger-muted); }
+.bg-closed { background-color: var(--closed); }
+.bg-closed-muted { background-color: var(--closed-muted); }
+.bg-info { background-color: var(--info); }
+.bg-info-muted { background-color: var(--info-muted); }
+
+/* Semantic Text Utility Classes */
+.text-primary { color: var(--text); }
+.text-muted { color: var(--muted); }
+.text-accent { color: var(--accent); }
+.text-ok { color: var(--ok); }
+.text-warn { color: var(--warn); }
+.text-danger { color: var(--danger); }
+.text-closed { color: var(--closed); }
+.text-info { color: var(--info); }
+
+/* Semantic Border Utility Classes */
+.border-line { border-color: var(--line); }
+.border-line-strong { border-color: var(--line-strong); }
+.border-accent { border-color: var(--accent); }
+.border-ok { border-color: var(--ok); }
+.border-warn { border-color: var(--warn); }
+.border-danger { border-color: var(--danger); }
+.border-closed { border-color: var(--closed); }
+
+/* Glass Panel */
+.glass-panel {
+  background-color: var(--panel-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.05), 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-panel:hover {
+  border-color: var(--line-strong);
+}
+
+/* Glow Utilities */
+.glow-accent { box-shadow: var(--glow-accent); }
+.glow-danger { box-shadow: var(--glow-danger); }
+.glow-warn { box-shadow: var(--glow-warn); }
+.glow-ok { box-shadow: var(--glow-ok); }
+
+/* Radar & Pulsing Animations */
+@keyframes radarPing {
+  0% { transform: scale(1); opacity: 0.8; }
+  75%, 100% { transform: scale(2.2); opacity: 0; }
+}
+
+.animate-radar-ping {
+  animation: radarPing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Light Domino Cascade Animation */
+@keyframes dominoCascade {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-domino-item {
+  animation: dominoCascade 0.35s ease-out forwards;
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--line); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--line-strong); }
+
+/* Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Manual reduced-motion toggle */
+[data-reduce-motion="true"] *, 
+[data-reduce-motion="true"] ::before, 
+[data-reduce-motion="true"] ::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
